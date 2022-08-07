@@ -1,0 +1,29 @@
+**/.idea/*
+**/.vscode/*
+
+.DS_Store
+.pytest_cache
+
+### Python
+# Byte-compiled
+__pycache__/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+*.log
+.project
+.classpath
+.settings
+target/
+.project
+.settings
+.classpath
+.pydevproject
+venv/
+*.iml
+!**/ddl/target

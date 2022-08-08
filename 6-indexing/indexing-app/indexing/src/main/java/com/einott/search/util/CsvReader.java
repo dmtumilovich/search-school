@@ -12,7 +12,7 @@ public class CsvReader {
     public static <T> Stream<T> readCsvLazy(String csvFileName, Class<T> pojoClass) {
         CsvToBean<T> csvToBean;
         try {
-            csvToBean = new CsvToBeanBuilder<T>(new FileReader(csvFileName)).build();
+            csvToBean = new CsvToBeanBuilder<T>(new FileReader(csvFileName)).withType(pojoClass).build();
         } catch (Exception e) {
             throw new CsvReaderException(e);
         }

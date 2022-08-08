@@ -1,0 +1,5 @@
+GET 7_analysis/_analyze
+{
+  "analyzer": "html_analyzer",
+  "text": "<br> Привет мир. X - это деcять. V - это пять </br>"
+}

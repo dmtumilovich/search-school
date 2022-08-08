@@ -1,0 +1,60 @@
+{
+  "tokens": [
+    {
+      "token": "привет",
+      "start_offset": 5,
+      "end_offset": 11,
+      "type": "<ALPHANUM>",
+      "position": 0
+    },
+    {
+      "token": "мир",
+      "start_offset": 12,
+      "end_offset": 15,
+      "type": "<ALPHANUM>",
+      "position": 1
+    },
+    {
+      "token": "10",
+      "start_offset": 17,
+      "end_offset": 18,
+      "type": "<NUM>",
+      "position": 2
+    },
+    {
+      "token": "эт",
+      "start_offset": 21,
+      "end_offset": 24,
+      "type": "<ALPHANUM>",
+      "position": 3
+    },
+    {
+      "token": "деcя",
+      "start_offset": 25,
+      "end_offset": 31,
+      "type": "<ALPHANUM>",
+      "position": 4
+    },
+    {
+      "token": "5",
+      "start_offset": 33,
+      "end_offset": 34,
+      "type": "<NUM>",
+      "position": 5
+    },
+    {
+      "token": "эт",
+      "start_offset": 37,
+      "end_offset": 40,
+      "type": "<ALPHANUM>",
+      "position": 6
+    },
+    {
+      "token": "пят",
+      "start_offset": 41,
+      "end_offset": 45,
+      "type": "<ALPHANUM>",
+      "position": 7
+    }
+  ]
+}

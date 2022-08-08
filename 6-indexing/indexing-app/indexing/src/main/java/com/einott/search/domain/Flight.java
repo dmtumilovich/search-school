@@ -26,9 +26,9 @@ public class Flight {
     private String distance;
     private String taxiIn;
     private String taxiOut;
-    private String cancelled; // TODO boolean
+    private String cancelled;
     private String cancellationCode;
-    private String diverted; // TODO boolean
+    private String diverted;
     private String carrierDelay;
     private String weatherDelay;
     private String nasDelay;

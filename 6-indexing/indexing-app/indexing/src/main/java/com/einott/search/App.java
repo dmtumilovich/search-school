@@ -3,7 +3,6 @@ package com.einott.search;
 import java.util.stream.Stream;
 
 import com.einott.search.conf.ElasticsearchConfig;
-import com.einott.search.domain.Flight;
 import com.einott.search.service.IndexService;
 import com.einott.search.util.CsvReader;
 
@@ -22,7 +21,8 @@ public class App {
                 .password(args[4])
                 .build();
             IndexService indexService = new IndexService(esConfig);
-            Stream<Flight> csvStream = CsvReader.readCsvLazy(args[5], Flight.class);
+            Class<?> pojoClass = Class.forName(args[7]);
+            Stream<?> csvStream = CsvReader.readCsvLazy(args[5], pojoClass);
             indexService.bulkIndex(args[6], csvStream);
         } catch (Throwable e) {
             log.error("Error while processing", e);

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Appenders>
+    <console name="console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{yyyy-MM-dd'T'HH:mm:ss,SSSX}{UTC} %5p [%tid] %c{1}.%M %m%n" charset="UTF-8" />
+    </console>
+  </Appenders>
+  <Loggers>
+    <Root level="warn">
+      <AppenderRef ref="console" />
+    </Root>
+    <logger name="com.einott.search" level="debug" additivity="false">
+      <appender-ref ref="console" />
+    </logger>
+  </Loggers>
+</Configuration>

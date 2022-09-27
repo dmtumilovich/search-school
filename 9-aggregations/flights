@@ -1,0 +1,91 @@
+# ==== flights data
+
+# total distance travelled by all flights
+GET /kibana_sample_data_flights/_search
+{
+  "size": 0, 
+  "aggs": {
+    "total-distance": {
+      "sum": {
+        "field": "DistanceKilometers"
+      }
+    }
+  }
+}
+
+# geo distance aggregation from Zurich Airport with several 1000km ranges
+GET /kibana_sample_data_flights/_search
+{
+  "size": 0,
+  "aggs": {
+    "ranges": {
+      "geo_distance": {
+        "field": "DestLocation",
+        "origin": "POINT (8.54917 47.464699)",
+        "unit": "km", 
+        "ranges": [
+          { "to": 1000 },
+          { "from": 1000, "to": 2000 },
+          { "from": 2000, "to": 3000 },
+          { "from": 4000, "to": 5000 },
+          { "from": 5000 }
+        ]
+      }
+    }
+  }
+}
+
+# top-10 most delayed destination airports
+GET /kibana_sample_data_flights/_search
+{
+  "size": 0,
+  "aggs": {
+    "airport-agg": {
+      "terms": {
+        "field": "DestAirportID"
+      },
+      "aggs": {
+        "total-flights": {
+          "value_count": {
+            "field": "DestAirportID"
+          }
+        },
+        "delayed-agg": {
+          "filter": {
+            "term": {
+              "FlightDelay": "true"
+            }
+          },
+          "aggs": {
+            "delayed-flights": {
+              "value_count": {
+                "field": "DestAirportID"
+              }
+            }
+          }
+        },
+        "delayed-percentage": {
+          "bucket_script": {
+            "buckets_path": {
+              "totalFlights": "total-flights",
+              "delayedFlights": "delayed-agg>delayed-flights"
+            },
+            "script": "params.delayedFlights / params.totalFlights * 100"
+          }
+        },
+        "sort_bucket": {
+          "bucket_sort": {
+            "sort": [
+              {
+                "delayed-percentage": {
+                  "order": "desc"
+                }
+              }
+            ],
+            "size": 10
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+# ==== ecommerce data
+
+# top 20 most commong first names of the customers from Birmingham
+GET /kibana_sample_data_ecommerce/_search
+{
+  "query": {
+    "match": {
+      "geoip.city_name": "Birmingham"
+    }
+  }, 
+  "size": 0, 
+  "aggs": {
+    "top-20-names": {
+      "terms": {
+        "field": "customer_first_name.keyword",
+        "size": 20
+      }
+    }
+  }
+}
+
+# most active (most orders) (most active what?? I assumed most active product) for women buying products (I assumed total price) cheaper than 75$
+GET /kibana_sample_data_ecommerce/_search
+{
+  "size": 0, 
+  "query": {
+    "range": {
+      "taxless_total_price": {
+        "lt": 75
+      }
+    }
+  },
+  "aggs": {
+    "top-product": {
+      "terms": {
+        "field": "products.product_name.keyword",
+        "size": 1
+      }
+    }
+  }
+}
+
+
+# how many products were bought in the last 3 days with customers from Great Britain
+GET /kibana_sample_data_ecommerce/_search
+{
+  "query": {
+    "bool": {
+      "must": [ 
+        {
+          "range": {
+            "order_date": {
+              "gte": "now-3d",
+              "lte": "now"
+            }
+          }
+        },
+        {
+          "match": {
+            "geoip.country_iso_code": "GB"
+          }
+        }
+      ]
+    }
+  },
+  "size": 0, 
+  "aggs": {
+    "products-count": {
+      "value_count": {
+        "field": "products._id.keyword"
+      }
+    }
+  }
+}

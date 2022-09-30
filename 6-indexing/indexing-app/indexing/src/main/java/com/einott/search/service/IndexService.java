@@ -1,5 +1,7 @@
 package com.einott.search.service;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -14,7 +16,7 @@ import co.elastic.clients.transport.rest_client.RestClientTransport;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class IndexService {
+public class IndexService implements Closeable {
 
     private final ElasticsearchClient esClient;
 
@@ -58,5 +60,11 @@ public class IndexService {
             System.exit(1);
         }
     }
-    
+
+    @Override
+    public void close() throws IOException {
+        if (esClient != null) {
+            esClient._transport().close();
+        }
+    }
 }

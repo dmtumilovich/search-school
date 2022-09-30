@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.einott.search</groupId>
-  <artifactId>indexing</artifactId>
+  <artifactId>search-api-app</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>indexing</name>
+  <name>search-api-app</name>
 
   <properties>
     <log4j.version>2.17.1</log4j.version>
